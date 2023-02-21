@@ -2,6 +2,9 @@
 
 $filename = './output.txt'; // The output file on the server
 $content = $_GET["x"];  //
+$content .= "\n";
+date_default_timezone_set("Europe/Rome");
+$content .= date("Y/m/d H:i:s");
 
 // Let's open $filename in write mode ad fwrite $content into it.
 if (!$fp = fopen($filename, 'w')) {
