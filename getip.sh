@@ -3,16 +3,7 @@
 domain='http://127.0.0.1:2000' # Domain of the server (CHANGE HERE)
 page='fetchIP.php'
 
-websites=( 'https://api.ipify.org' 'https://wtfismyip.com/text' )
-
-# Get IP address
-for website in "${websites[@]}"; do
-    if  curl -I "${website}" 2>&1 | grep -w "200\|301\|405" -q ; then
-        MYIP=$(curl "${website}" --silent)
-        break
-    fi
-done
-
+MYIP=$(ifconfig | grep 'inet ' | grep -v 127.0.0.1 | awk '{print $2}')
 
 # If the above fails, try this
 if [ -z "$MYIP" ]; then
